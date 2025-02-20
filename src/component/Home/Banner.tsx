@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Banner = () => {
   return (
     <div
@@ -12,9 +14,11 @@ const Banner = () => {
         <div className="max-w-md">
           <h1 className="mb-5 text-5xl font-bold">Welcome To Car Store</h1>
 
-          <button className="btn uppercase lg:mt-8 btn-primary bg-[rgb(246,114,128)] border-none">
-            View All Car
-          </button>
+          <NavLink to="/product">
+            <button className="btn uppercase lg:mt-8 btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none">
+              View All Car
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>

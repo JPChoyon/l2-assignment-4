@@ -4,11 +4,14 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
+import Product from "../pages/Product";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -17,6 +20,10 @@ const router = createBrowserRouter([
             <Home />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/product",
+        element: <Product />,
       },
     ],
   },

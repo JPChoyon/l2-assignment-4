@@ -1,6 +1,7 @@
 import { FaCartPlus, FaUser } from "react-icons/fa6";
 import { logout, useCurrentUser } from "../redux/feature/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -9,16 +10,24 @@ const Navbar = () => {
   const navItem = [
     <>
       <li>
-        <a className="hover:bg-red-100">Home</a>
+        <NavLink to="/" className="hover:bg-red-100 ">
+          Home
+        </NavLink>
       </li>
       <li>
-        <a className="hover:bg-red-100">Product</a>
+        <NavLink to="/product" className="hover:bg-red-100">
+          Product
+        </NavLink>
       </li>
       <li>
-        <a className="hover:bg-red-100">Cart</a>
+        <NavLink to="1" className="hover:bg-red-100">
+          Cart
+        </NavLink>
       </li>
       <li>
-        <a className="hover:bg-red-100">About</a>
+        <NavLink to="11" className="hover:bg-red-100">
+          About
+        </NavLink>
       </li>
     </>,
   ];
