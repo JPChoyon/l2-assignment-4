@@ -1,22 +1,30 @@
 import { FaCartPlus, FaUser } from "react-icons/fa6";
+import { logout, useCurrentUser } from "../redux/feature/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(useCurrentUser);
+
   const navItem = [
     <>
       <li>
-        <a>Home</a>
+        <a className="hover:bg-red-100">Home</a>
       </li>
       <li>
-        <a>Product</a>
+        <a className="hover:bg-red-100">Product</a>
       </li>
       <li>
-        <a>Cart</a>
+        <a className="hover:bg-red-100">Cart</a>
       </li>
       <li>
-        <a>About</a>
+        <a className="hover:bg-red-100">About</a>
       </li>
     </>,
   ];
+  const hadnleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -46,11 +54,11 @@ const Navbar = () => {
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">
-            <span className="text-[#D51820]">Car</span> Store
+            <span className="text-[#F67280]">Car</span> Store
           </a>
         </div>
         <div className="navbar-center hidden lg:flex font-semibold">
-          <ul className="menu menu-horizontal px-1">{navItem}</ul>
+          <ul className="menu menu-horizontal  px-1">{navItem}</ul>
         </div>
         <div className="navbar-end">
           <div className="flex gap-2">
@@ -65,32 +73,42 @@ const Navbar = () => {
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle avatar"
+                className="btn btn-ghost  btn-circle avatar"
               >
                 <div className="w-10 rounded">
                   {/* <img
                     alt="Tailwind CSS Navbar component"
                     src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                   /> */}
-                  <FaUser className="text-4xl text-[#D51820]" />
+                  <FaUser className="text-4xl text-[#F67280]" />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
               >
-                <li>
-                  <a className="justify-between">Profile</a>
-                </li>
+                {user ? (
+                  <li>
+                    <a className="justify-between">{user.email}</a>
+                  </li>
+                ) : (
+                  <li>
+                    <a className="justify-between">Profile</a>
+                  </li>
+                )}
                 <li>
                   <a>
                     <FaCartPlus />
                     Cart
                   </a>
                 </li>
-                <li>
-                  <a>Logout</a>
-                </li>
+                {user ? (
+                  <li onClick={hadnleLogout}>
+                    <a>Logout</a>
+                  </li>
+                ) : (
+                  <li>Login</li>
+                )}
               </ul>
             </div>
           </div>

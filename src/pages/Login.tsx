@@ -4,22 +4,38 @@ import { useLoginMutation } from "../redux/feature/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { setUser } from "../redux/feature/auth/authSlice";
 import verifyToken from "../utils/verifyToken";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm();
-  const [login, { data, error }] = useLoginMutation();
-  console.log(data, error);
-  const onsubmit = async (data) => {
-    const userInfo = {
-      email: data.email,
-      password: data.password,
-    };
-    const res = await login(userInfo).unwrap();
-    dispatch(setUser({ user: {}, token: res.data.token }));
-    const user = verifyToken(res.data.token);
-    console.log(user);
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+
+  const onsubmit = async (data:any) => {
+    
+    try {
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+
+      const userData = verifyToken(res.data.token);
+      dispatch(setUser({ user: userData, token: res.data.token }));
+      toast.success("User logged in successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
+      if (error) {
+        toast.error("Incorrect email or password");
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    }
   };
+
   return (
     <div>
       <div className="max-w-md mx-auto bg-[rgb(246,114,128)] p-10 rounded-xl mt-4">
