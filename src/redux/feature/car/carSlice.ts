@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
-
 export type Car = {
   id: string;
   brand: string;
@@ -16,7 +15,6 @@ type CarState = {
   error: string | null;
 };
 
-
 const initialState: CarState = {
   cars: [],
   loading: false,
@@ -30,16 +28,9 @@ const carSlice = createSlice({
     setCars: (state, action: PayloadAction<Car[]>) => {
       state.cars = action.payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
-    },
   },
 });
 
-
-export const { setCars, setLoading, setError } = carSlice.actions;
+export const { setCars } = carSlice.actions;
 export const selectCars = (state: RootState) => state.cars.cars;
 export default carSlice.reducer;

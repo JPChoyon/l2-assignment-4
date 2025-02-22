@@ -6,6 +6,8 @@ import Register from "../pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
 import Product from "../pages/Product";
 import ErrorPage from "../pages/ErrorPage";
+import CarDetails from "../component/Product/CardDetails";
+import Cart from "../pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,22 @@ const router = createBrowserRouter([
       {
         path: "/product",
         element: <Product />,
+      },
+      {
+        path: "/product/:id",
+        element: (
+          <ProtectedRoute>
+            <CarDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

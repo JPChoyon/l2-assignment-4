@@ -21,22 +21,21 @@ const TopFeatureCar = () => {
             them, making them top sellers.
           </p>
         </div>
-        <div className="flex flex-wrap -m-4 justify-center">
+        <div className="flex flex-wrap gap-4 -m-4 justify-center">
           {cars?.slice(0, 3).map((car: any) => (
-            <div key={car.id} className="xl:w-1/4 md:w-1/2 p-4">
-              <div className="bg-gray-100 p-6 rounded-lg">
-                <img
-                  className="h-40 rounded w-full object-cover object-center mb-6"
-                  src="https://dummyimage.com/720x400"
-                  alt={car.name}
-                />
-                <h3 className="tracking-widest text-red-500 text-xs font-medium title-font">
-                  {car.brand}
-                </h3>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
-                  {car.name}
-                </h2>
-                <p className="leading-relaxed text-base">{car.description}</p>
+            <div key={car._id} className="card bg-base-100 w-96 shadow-xl">
+              <figure className="px-10 pt-10">
+                <img src={car?.image} alt={car?.model} className="rounded-xl" />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">{car.brand}</h2>
+                <h2 className="card-title text-xs">{car.model}</h2>
+                <p>{car?.description}</p>
+                <div className="card-actions">
+                  <button className="btn  text-white uppercase lg:mt-8 btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none">
+                    See Details
+                  </button>
+                </div>
               </div>
             </div>
           ))}

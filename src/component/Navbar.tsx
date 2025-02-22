@@ -15,12 +15,12 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/product" className="hover:bg-red-100">
+        <NavLink to="product" className="hover:bg-red-100">
           Product
         </NavLink>
       </li>
       <li>
-        <NavLink to="1" className="hover:bg-red-100">
+        <NavLink to="cart" className="hover:bg-red-100">
           Cart
         </NavLink>
       </li>
