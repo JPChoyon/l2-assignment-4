@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./feature/auth/authSlice";
 import baseApi from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
-import carReducer from "./feature/car/carSlice"
+import carReducer from "./feature/car/carSlice";
 import {
   persistStore,
   persistReducer,
@@ -13,6 +13,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import ordersReducer from "./feature/order/orderSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,7 +24,8 @@ export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
-    cars:carReducer
+    cars: carReducer,
+    orders: ordersReducer,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares({

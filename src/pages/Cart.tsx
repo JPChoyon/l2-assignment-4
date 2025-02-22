@@ -8,25 +8,18 @@ import { toast } from "react-hot-toast";
 import { useCurrentUser } from "../redux/feature/auth/authSlice";
 
 const Cart = () => {
-  // Fetching the current user's information
   const user = useSelector(useCurrentUser);
-console.log(user);
-  // Fetching the orders specific to the user using their email
   const {
     data: ordersData,
     isLoading,
     error,
-  } = useGetOrdersByUserQuery(user?.email); // Make sure the API filters based on the email
-console.log(ordersData);
+  } = useGetOrdersByUserQuery(user?.email);
+
   const [cancelOrder] = useCancelOrderMutation();
   const [selectedOrders, setSelectedOrders] = useState<string[]>([]);
-
   if (isLoading) return <p>Loading orders...</p>;
   if (error) return <p className="text-red-500">Failed to fetch orders.</p>;
-
   const orders = ordersData?.data || [];
-  console.log(orders);
-
   const toggleSelectOrder = (orderId: string) => {
     setSelectedOrders((prevSelected) =>
       prevSelected.includes(orderId)
@@ -40,7 +33,6 @@ console.log(ordersData);
       toast.error("Please select at least one order.");
       return;
     }
-
     toast.success("Proceeding to payment...");
     // Redirect to payment page or process order
   };
@@ -61,28 +53,29 @@ console.log(ordersData);
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
         <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
+
         {orders.length === 0 ? (
           <p className="text-center text-gray-500">No orders in cart.</p>
         ) : (
           <div className="flex flex-wrap justify-center">
-            {orders.map((order) => (
+            {orders.map((order: any) => (
               <div
                 key={order._id}
                 className="card bg-base-100 w-96 shadow-xl m-4 p-4 border"
               >
-                <h2 className="card-title">{order.carId}</h2>
-                <p>Name: {order.brand}</p>
+                <p>Brand: {order.car?.brand || "Unknown"}</p>
+                <p>Model: {order.car?.model || "N/A"}</p>
                 <p>Quantity: {order.quantity}</p>
                 <p>Total Price: ${order.totalPrice}</p>
                 <div className="flex items-center justify-between mt-4">
                   <input
                     type="checkbox"
-                    checked={selectedOrders.includes(order.id)}
-                    onChange={() => toggleSelectOrder(order.id)}
+                    checked={selectedOrders.includes(order._id)}
+                    onChange={() => toggleSelectOrder(order._id)}
                     className="checkbox checkbox-primary"
                   />
                   <button
-                    onClick={() => handleCancelOrder(order.id)}
+                    onClick={() => handleCancelOrder(order._id)}
                     className="btn btn-error btn-sm"
                   >
                     Cancel Order

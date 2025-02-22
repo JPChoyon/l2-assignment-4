@@ -4,7 +4,7 @@ import { useLoginMutation } from "../redux/feature/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { setUser } from "../redux/feature/auth/authSlice";
 import verifyToken from "../utils/verifyToken";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
@@ -13,8 +13,7 @@ const Login = () => {
   const [login] = useLoginMutation();
   const navigate = useNavigate();
 
-  const onsubmit = async (data:any) => {
-    
+  const onsubmit = async (data: any) => {
     try {
       const userInfo = {
         email: data.email,
@@ -68,6 +67,11 @@ const Login = () => {
             Login
           </button>
         </form>
+        <Link to="/register">
+          <button className="btn btn-block mt-4 hover:bg-[#e9bfc3] ">
+            Register
+          </button>
+        </Link>
       </div>
     </div>
   );
