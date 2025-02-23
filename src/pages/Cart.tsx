@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Cart = () => {
   const user = useSelector(useCurrentUser);
-  console.log(user);
+  
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const [placeOrder] = usePlaceOrderMutation();

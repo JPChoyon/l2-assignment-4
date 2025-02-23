@@ -9,6 +9,7 @@ import ErrorPage from "../pages/ErrorPage";
 import CarDetails from "../component/Product/CardDetails";
 import Cart from "../pages/Cart";
 import OrderVerification from "../pages/VerifyOrder";
+import OrderDetails from "@/pages/Order";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrderVerification />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/order",
+        element: (
+          <ProtectedRoute>
+            <OrderDetails />
           </ProtectedRoute>
         ),
       },
