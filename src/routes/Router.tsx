@@ -8,6 +8,7 @@ import Product from "../pages/Product";
 import ErrorPage from "../pages/ErrorPage";
 import CarDetails from "../component/Product/CardDetails";
 import Cart from "../pages/Cart";
+import OrderVerification from "../pages/VerifyOrder";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/verify",
+        element: (
+          <ProtectedRoute>
+            <OrderVerification />
           </ProtectedRoute>
         ),
       },

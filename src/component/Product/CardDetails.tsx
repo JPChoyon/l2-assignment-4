@@ -1,42 +1,42 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetCarByIdQuery } from "../../redux/feature/car/carApi";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useCurrentUser } from "../../redux/feature/auth/authSlice";
-import { usePlaceOrderMutation } from "../../redux/feature/order/orderApi";
+import { addToCart } from "../../redux/feature/cart/cartSlice";
 
 const CarDetails = () => {
   const { id } = useParams();
   const { data, error, isLoading } = useGetCarByIdQuery(id);
-  const [placeOrder, { isLoading: isPlacingOrder }] = usePlaceOrderMutation();
-  const user = useSelector(useCurrentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">Error loading car details.</p>;
 
   const car = data?.data;
   const totalPrice = car.price * quantity;
 
-  const handleOrder = async () => {
-    if (!user?.email) {
-      toast.error("You must be logged in to place an order.");
-      return;
-    }
-    try {
-      const orderData = {
-        email: user.email,
-        car: car._id,
-        quantity,
-        totalPrice,
-      };
-      console.log(orderData);
-      await placeOrder(orderData);
-      toast.success("Order placed successfully!");
-    } catch (error) {
-      toast.error("Failed to place order.");
-    }
+  const handleAddToCart = () => {
+    const cartItem = {
+      carId: car._id,
+      brand: car.brand,
+      model: car.model,
+      price: car.price,
+      quantity,
+      totalPrice,
+    };
+
+    // Dispatch to add car to the cart
+    dispatch(addToCart(cartItem));
+
+    // Show success toast
+    toast.success("Added to cart!");
+
+    // Redirect to cart page
+    navigate("/cart");
   };
 
   return (
@@ -75,12 +75,8 @@ const CarDetails = () => {
             {car?.quantity === 0 ? (
               <button className="btn btn-disabled">Out of stock</button>
             ) : (
-              <button
-                className="btn btn-primary"
-                onClick={handleOrder}
-                disabled={isPlacingOrder}
-              >
-                {isPlacingOrder ? "Processing..." : "Buy Now"}
+              <button className="btn btn-primary" onClick={handleAddToCart}>
+                Add to Cart
               </button>
             )}
           </div>

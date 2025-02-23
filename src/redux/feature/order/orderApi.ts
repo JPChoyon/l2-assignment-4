@@ -21,11 +21,11 @@ const orderApi = baseApi.injectEndpoints({
         body: orderData,
       }),
     }),
-
-    cancelOrder: builder.mutation({
-      query: (orderId) => ({
-        url: `/orders/${orderId}`,
-        method: "DELETE",
+    verifyOrder: builder.query({
+      query: (order_id) => ({
+        url: "/orders/verify",
+        params: { order_id },
+        method: "GET",
       }),
     }),
   }),
@@ -34,7 +34,7 @@ const orderApi = baseApi.injectEndpoints({
 export const {
   useGetOrdersByUserQuery,
   usePlaceOrderMutation,
-  useCancelOrderMutation,
   useGetOrderByIdQuery,
+  useVerifyOrderQuery,
 } = orderApi;
 export default orderApi;
