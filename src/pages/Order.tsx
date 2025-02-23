@@ -34,7 +34,7 @@ export interface Order {
 
 export default function OrderDetails() {
   const user = useSelector(useCurrentUser);
-  const { isLoading, data } = useGetOrdersByUserQuery(user.email, {
+  const { isLoading, data } = useGetOrdersByUserQuery(user?.email, {
     refetchOnMountOrArgChange: true,
   });
   const orderData: Order[] = data?.data;

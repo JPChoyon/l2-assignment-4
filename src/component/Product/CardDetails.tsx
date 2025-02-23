@@ -1,9 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetCarByIdQuery } from "../../redux/feature/car/carApi";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useCurrentUser } from "../../redux/feature/auth/authSlice";
 import { addToCart } from "../../redux/feature/cart/cartSlice";
 
 const CarDetails = () => {

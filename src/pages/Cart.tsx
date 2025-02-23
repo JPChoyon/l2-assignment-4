@@ -3,11 +3,21 @@ import { clearCart } from "../redux/feature/cart/cartSlice";
 import { useCurrentUser } from "../redux/feature/auth/authSlice";
 import { usePlaceOrderMutation } from "../redux/feature/order/orderApi";
 import toast from "react-hot-toast";
+import { RootState } from "@/redux/store";
 
+interface CartItem {
+  carId: string;
+  quantity: number;
+  brand: string;
+  model: string;
+  totalPrice: number;
+}
 const Cart = () => {
   const user = useSelector(useCurrentUser);
-  
-  const cartItems = useSelector((state) => state.cart.items);
+
+  const cartItems: CartItem[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
   const dispatch = useDispatch();
   const [placeOrder] = usePlaceOrderMutation();
 
@@ -42,7 +52,7 @@ const Cart = () => {
           <p className="text-center text-gray-500">Your cart is empty.</p>
         ) : (
           <div>
-            {cartItems.map((item) => (
+            {cartItems.map((item: CartItem) => (
               <div
                 key={item.carId}
                 className="flex items-center justify-between p-4 border-b"
