@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
@@ -11,15 +12,24 @@ const Banner = () => {
     >
       <div className="hero-overlay bg-[#D51820] bg-opacity-10"></div>
       <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-md">
+        <motion.div
+          className="max-w-md"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1 className="mb-5 text-5xl font-bold">Welcome To Car Store</h1>
 
           <NavLink to="/product">
-            <button className="btn uppercase lg:mt-8 btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none">
+            <motion.button
+              className="btn uppercase lg:mt-8 btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
               View All Car
-            </button>
+            </motion.button>
           </NavLink>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

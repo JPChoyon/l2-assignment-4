@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetCarByIdQuery } from "../../redux/feature/car/carApi";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { addToCart } from "../../redux/feature/cart/cartSlice";
+import { motion } from "framer-motion";
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -28,24 +29,30 @@ const CarDetails = () => {
       totalPrice,
     };
 
-    // Dispatch to add car to the cart
     dispatch(addToCart(cartItem));
-
-    // Show success toast
     toast.success("Added to cart!");
-
-    // Redirect to cart page
     navigate("/cart");
   };
 
   return (
-    <section className="text-gray-600 body-font">
+    <motion.section
+      className="text-gray-600 body-font"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-col items-center">
-          <img
+        <motion.div
+          className="flex flex-col items-center"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <motion.img
             src={car.image}
             alt={car.brand}
             className="w-96 h-60 object-cover rounded-lg"
+            whileHover={{ scale: 1.05 }}
           />
           <h2 className="text-3xl font-bold mt-5">
             {car.brand} {car.model}
@@ -72,16 +79,26 @@ const CarDetails = () => {
 
           <div className="mt-5">
             {car?.quantity === 0 ? (
-              <button className="btn btn-disabled">Out of stock</button>
+              <motion.button
+                className="btn btn-disabled"
+                whileTap={{ scale: 0.9 }}
+              >
+                Out of stock
+              </motion.button>
             ) : (
-              <button className="btn btn-primary" onClick={handleAddToCart}>
+              <motion.button
+                className="btn btn-primary"
+                onClick={handleAddToCart}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 Add to Cart
-              </button>
+              </motion.button>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
