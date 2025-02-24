@@ -11,6 +11,10 @@ import Cart from "../pages/Cart";
 import OrderVerification from "../pages/VerifyOrder";
 import OrderDetails from "@/pages/Order";
 import About from "@/pages/About";
+import Dashboard from "@/pages/Dashboard";
+import CreateCar from "@/pages/dashboard/CreateCar";
+import Order from "@/pages/dashboard/Order";
+import Products from "@/pages/dashboard/Products";
 
 const router = createBrowserRouter([
   {
@@ -58,9 +62,32 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            path: "/dashboard/create-car",
+            element: <CreateCar />,
+          },
+          {
+            path: "/dashboard/orders",
+            element: <Order />,
+          },
+          {
+            path: "/dashboard/products",
+            element: <Products />,
+          },
+        ],
       },
     ],
   },
