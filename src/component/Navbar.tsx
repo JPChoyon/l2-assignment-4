@@ -34,9 +34,18 @@ const Navbar = () => {
           Order
         </NavLink>
       </li>
+      {user?.role === "admin" ? (
+        <li>
+          <NavLink to="dashboard" className="hover:bg-red-100">
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <></>
+      )}
     </>,
   ];
-  const hadnleLogout = () => {
+  const handleLogout = () => {
     dispatch(logout());
   };
   return (
@@ -106,9 +115,7 @@ const Navbar = () => {
                     <a className="justify-between">{user.email}</a>
                   </li>
                 ) : (
-                  <li>
-                    <a className="justify-between">Profile</a>
-                  </li>
+                  <li></li>
                 )}
                 <li>
                   <NavLink to="cart" className="hover:bg-red-100">
@@ -117,11 +124,15 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 {user ? (
-                  <li onClick={hadnleLogout}>
+                  <li onClick={handleLogout}>
                     <a>Logout</a>
                   </li>
                 ) : (
-                  <li>Login</li>
+                  <li>
+                    <NavLink to="/login" className="hover:bg-red-100">
+                      Login
+                    </NavLink>
+                  </li>
                 )}
               </ul>
             </div>
