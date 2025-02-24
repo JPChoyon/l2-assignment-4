@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import { useGetAllCarQuery } from "../../redux/feature/car/carApi";
+import { Link } from "react-router-dom";
 
 const TopFeatureCar = () => {
   const { data, error, isLoading } = useGetAllCarQuery(undefined);
@@ -32,9 +33,11 @@ const TopFeatureCar = () => {
                 <h2 className="card-title text-xs">{car.model}</h2>
                 <p>{car?.description}</p>
                 <div className="card-actions">
-                  <button className="btn  text-white uppercase lg:mt-8 btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none">
-                    See Details
-                  </button>
+                  <Link to={`/product/${car._id}`}>
+                    <button className="btn uppercase lg:mt-8 text-white btn-primary hover:bg-[#f03f50] bg-[rgb(246,114,128)] border-none">
+                      See Details
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

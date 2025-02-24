@@ -25,8 +25,13 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="11" className="hover:bg-red-100">
+        <NavLink to="about" className="hover:bg-red-100">
           About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="order" className="hover:bg-red-100">
+          Order
         </NavLink>
       </li>
     </>,
@@ -106,10 +111,10 @@ const Navbar = () => {
                   </li>
                 )}
                 <li>
-                  <a>
+                  <NavLink to="cart" className="hover:bg-red-100">
                     <FaCartPlus />
                     Cart
-                  </a>
+                  </NavLink>
                 </li>
                 {user ? (
                   <li onClick={hadnleLogout}>

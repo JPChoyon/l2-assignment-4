@@ -12,9 +12,9 @@ interface CartItem {
   model: string;
   totalPrice: number;
 }
+
 const Cart = () => {
   const user = useSelector(useCurrentUser);
-
   const cartItems: CartItem[] = useSelector(
     (state: RootState) => state.cart.items
   );
@@ -24,6 +24,7 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
   const handlePayment = async () => {
     console.log(cartItems);
     const res = await placeOrder({
@@ -31,16 +32,13 @@ const Cart = () => {
       car: cartItems[0].carId,
       quantity: cartItems[0].quantity,
     });
-    if (res.data.order && res.data.payment) {
-      toast.success("order placed successfully redirected to the payment page");
-      if (res.data.payment) {
-        console.log(res.data.payment);
-        window.location.href = res.data.payment.checkout_url;
-      }
+
+    if (res.data?.order && res.data?.payment) {
+      toast.success("Order placed successfully! Redirecting to payment page.");
+      window.location.href = res.data.payment.checkout_url;
     } else {
-      toast.error("something went wrong");
+      toast.error("Something went wrong");
     }
-    console.log(res);
   };
 
   return (
@@ -69,15 +67,18 @@ const Cart = () => {
           </div>
         )}
 
-        <div className="mt-6 flex gap-4 justify-center">
-          <button onClick={handleClearCart} className="btn btn-secondary">
-            Clear Cart
-          </button>
+        {/* Conditionally render buttons only if cart is not empty */}
+        {cartItems.length > 0 && (
+          <div className="mt-6 flex gap-4 justify-center">
+            <button onClick={handleClearCart} className="btn btn-secondary">
+              Clear Cart
+            </button>
 
-          <button onClick={handlePayment} className="btn btn-primary ">
-            Proceed to Payment
-          </button>
-        </div>
+            <button onClick={handlePayment} className="btn btn-primary">
+              Proceed to Payment
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

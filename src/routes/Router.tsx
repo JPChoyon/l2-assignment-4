@@ -10,6 +10,7 @@ import CarDetails from "../component/Product/CardDetails";
 import Cart from "../pages/Cart";
 import OrderVerification from "../pages/VerifyOrder";
 import OrderDetails from "@/pages/Order";
+import About from "@/pages/About";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             <OrderDetails />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },
