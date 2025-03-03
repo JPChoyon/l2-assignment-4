@@ -18,6 +18,7 @@ const CreateCarForm = () => {
       year: Number(data.year),
       price: Number(data.price),
       quantity: Number(data.quantity),
+      inStock:true
     };
 
     try {

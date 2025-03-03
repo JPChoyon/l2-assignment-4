@@ -1,50 +1,42 @@
-# React + TypeScript + Vite
+# Admin Credentials 
+- email: jpchoyonkhan@gmail.com
+- password: 123456
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# This is car store website.
 
-Currently, two official plugins are available:
+### if you want to run in this locally then please follow the procedure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Step 1
 
-## Expanding the ESLint configuration
+First open terminal clone the link git repo.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+https://github.com/JPChoyon/l2-assignment-4.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Step 2
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Now open folder in vs code.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Step 3
+
+Now run this command in terminal.
+
+```cmd
+yarn 
 ```
+
+
+
+## Step 5
+
+For run the server
+
+```
+yarn dev
+```
+
+### **Project Implementation Technology:**
+
+- `react js`, `typescript` , `daisyui` etc
+- Using `zod` for validation data.
